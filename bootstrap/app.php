@@ -10,9 +10,14 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
+// 加载自己定义的函数
+require_once __DIR__ . '/helpers.php';
+// __FILE__ 返回当前文件带文件名的绝对路径
+// __DIR__ 返回当前文件所在的目录, 相当于 dirname(__FILE__)
+
 
 $app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 
 /*
