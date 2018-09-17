@@ -14,11 +14,11 @@
                 </h4>
             </div>
 
-            @include('common._error')
+        @include('common._error')
 
-            <!-- 修改个人资料表单 -->
+        <!-- 修改个人资料表单 -->
             <div class="panel-body">
-                <form action="{{ route('users.update',$user->id) }}" method="POST">
+                <form action="{{ route('users.update',$user->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     {{-- 这里用 PUT 也可以--}}
@@ -37,10 +37,19 @@
 
                     <div class="form-group">
                         <label for="introduction-field">个人简介</label>
-                        <textarea name="introduction" id="introduction-field" rows="3" class="form-control">
-                            {{ old('introduction',$user->introduction) }}
-                        </textarea>
+                        <textarea name="introduction" id="introduction-field" rows="3" class="form-control">{{ old('introduction',$user->introduction) }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="avatar-field" class="avatar-label">用户头像</label>
+                        <input type="file" name="avatar" id="avatar-field">
+
+                        @if($user->avatar)
+                            <br>
+                            <img src="{{ $user->avatar }}" alt="" width="200px" class="thumbnail img-responsive">
+                        @endif
+                    </div>
+
 
                     <!-- Well 是一种会引起内容凹陷显示或插图效果的容器 -->
                     <div class="well well-sm">

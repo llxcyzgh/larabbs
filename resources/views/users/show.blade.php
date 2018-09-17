@@ -13,7 +13,7 @@
                     <div class="media">
                         <!-- 头像 -->
                         <div class="text-center">
-                            <img src="https://fsdhubcdn.phphub.org/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600" alt="" width="300px" height="300px" class="thumbnail img-responsive">
+                            <img src="{{ config('app.url').$user->avatar}}" alt="" width="300px" height="300px" class="thumbnail img-responsive">
                         </div>
 
                         <!-- 头像介绍内容 -->
