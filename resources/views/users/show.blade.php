@@ -1,3 +1,5 @@
+{{-- views/users/show.blade.php 显示用户个人资料 --}}
+
 @extends('layouts.app')
 @section('title', $user->name .' 的个人中心')
 @section('content')
@@ -18,10 +20,13 @@
                         <div class="media-body">
                             <hr>
                             <h4><strong>个人简介</strong></h4>
-                            <p>The PHP Framework For Web Artisans</p>
+                            <p>{{ $user->introduction }}</p>
                             <hr>
                             <h4><strong>注册于</strong></h4>
-                            <p>2018 09 09</p>
+                            <p>{{ $user->created_at->diffForHumans() }}</p>
+                            {{-- dd() 测试函数 --}}
+                            {{--<p>{{ dd($user->created_at) }}</p>--}}
+
                         </div>
                     </div>
                 </div>
