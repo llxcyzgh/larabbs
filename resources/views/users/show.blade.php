@@ -13,7 +13,8 @@
                     <div class="media">
                         <!-- 头像 -->
                         <div class="text-center">
-                            <img src="{{ config('app.url').$user->avatar}}" alt="" width="300px" height="300px" class="thumbnail img-responsive">
+                            <img src="{{ $user->avatar?(config('app.url').$user->avatar):'https://a.photo/images/2018/09/17/peppa.png'}}" alt="" width="300px" height="300px"
+                                 class="thumbnail img-responsive">
                         </div>
 
                         <!-- 头像介绍内容 -->
@@ -26,6 +27,7 @@
                             <p>{{ $user->created_at->diffForHumans() }}</p>
                             {{-- dd() 测试函数 --}}
                             {{--<p>{{ dd($user->created_at) }}</p>--}}
+                            {{--{{ dd(public_path()) }}--}}
 
                         </div>
                     </div>
@@ -38,7 +40,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <span>
-                        <h1 class="panel-title pull-left" style="font-size: 30px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
+                        <h1 class="panel-title pull-left" style="font-size: 30px;">{{ $user->name }}
+                            <small>{{ $user->email }}</small></h1>
                     </span>
                 </div>
             </div>
@@ -48,6 +51,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     暂无数据 ~_~
+
                 </div>
             </div>
 

@@ -11,7 +11,9 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth', ['except' => [
+            'show',
+        ]]);
     }
 
     // 显示用户个人信息页面
@@ -23,12 +25,15 @@ class UsersController extends Controller
     // 显示修改用户信息页面
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     // 执行修改用户信息动作
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
+        $this->authorize('update', $user);
+
 //        dd($request->avatar); // 测试
 //        dd($request->file(avatar));
 
@@ -36,9 +41,18 @@ class UsersController extends Controller
 //        dd($data);
 
         if ($request->avatar) {
-            $result = $uploader->save($request->avatar, 'avatars', $user->id,362);
+            $result = $uploader->save($request->avatar, 'avatars', $user->id, 362);
             if ($result) {
                 $data['avatar'] = $result['path'];
+                // 数据库本来就存在头像,[且本地也找得到该图片,防止之前删除了,数据库没有更新] 则先进行删除,再保存新的
+                if ($user->avatar) {
+                    $filename = public_path() . $user->avatar;
+                    if (is_file($filename)) {
+                        unlink($filename);
+                        $user->avatar = null;
+                        $user->save();
+                    }
+                }
             }
         }
 
