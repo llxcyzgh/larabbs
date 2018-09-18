@@ -16,7 +16,7 @@ class TopicsController extends Controller
 
 	public function index()
 	{
-		$topics = Topic::paginate();
+		$topics = Topic::with('user','category')->paginate(30);// 默认分页是15条
 		return view('topics.index', compact('topics'));
 	}
 
