@@ -43,6 +43,12 @@
                     <li><a href="{{ route('login') }}">登陆</a></li>
                     <li><a href="{{ route('register') }}">注册</a></li>
                 @else
+                    <li>
+                        <a href="{{ route('topics.create') }}">
+                            <i class="glyphicon glyphicon-plus" aria-hidden="true" title="新建话题"></i>
+                        </a>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
                            aria-haspopup="true" v-pre>
