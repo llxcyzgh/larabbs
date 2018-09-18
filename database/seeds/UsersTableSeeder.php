@@ -17,11 +17,12 @@ class UsersTableSeeder extends Seeder
 
         // 头像假数据
         $avatars = [
-            '/uploads/images/201710/14/1/s5ehp11z5s.png?imageView2/1/w/200/h/200',
-            '/uploads/images/201710/14/1/s5ehp11z6s.png?imageView2/1/w/200/h/200',
-            '/uploads/images/201710/14/1/s5ehp11z7s.png?imageView2/1/w/200/h/200',
-            '/uploads/images/201710/14/1/s5ehp11z8s.png?imageView2/1/w/200/h/200',
-            '/uploads/images/201710/14/1/s5ehp11z9s.png?imageView2/1/w/200/h/200',
+//            '/uploads/images/201710/14/1/s5ehp11z5s.png?imageView2/1/w/200/h/200',
+            '/uploads/images/avatars/201809/17/1_1537184717_Lhd1SHqu86.png',
+            '/uploads/images/avatars/201809/17/1_1537184717_LOnMrqbHJn.png',
+            '/uploads/images/avatars/201809/17/1_1537184717_NDnzMutoxX.png',
+            '/uploads/images/avatars/201809/17/1_1537184717_s5ehp11z6s.png',
+            '/uploads/images/avatars/201809/17/1_1537184717_ZqM7iaP4CR.png',
         ];
 
         // 生成数据集合

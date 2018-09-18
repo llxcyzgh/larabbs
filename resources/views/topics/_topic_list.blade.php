@@ -69,9 +69,10 @@
             <li class="media">
                 <div class="media-left">
                     <a href="{{ route('users.show',[$topic->user_id]) }}">
-                        <img src="{{ $topic->user->avatar }}" alt="" title="{{ $topic->user->name }}"
-                             class="media-object img-responsive"
-                             style="width: 52px;height: 52px;background-color: #ff8803;">
+                        <img src="{{ config('app.url').$topic->user->avatar }}" alt="" title="{{ $topic->user->name }}"
+                             class="media-object img-thumbnail"
+                             style="width: 52px;height: 52px;">
+                        {{--<img src="{{ config('app.url').$topic->user->avatar }}" alt="" title="{{ $topic->user->name }}" width="100">--}}
                     </a>
                 </div>
 
@@ -88,7 +89,8 @@
                     </div>
 
                     <div class="media-body meta">
-                        <a href="{{ route('categories.show',$topic->category->id) }}" title="{{ $topic->category->name }}">
+                        <a href="{{ route('categories.show',$topic->category->id) }}"
+                           title="{{ $topic->category->name }}">
                             <i class="glyphicon glyphicon-folder-open"></i>
                             {{ $topic->category->name }}
                         </a>
@@ -99,8 +101,12 @@
                             {{ $topic->user->name }}
                         </a>
                         <span> • </span>
+
                         <i class="glyphicon glyphicon-time" aria-hidden="true"></i>
-                        <span class="timeago" title="最后活跃于">{{ $topic->updated_at->diffForHumans() }}</span>
+                        {{--                        <span class="timeago" title="最后活跃于">{{ $topic->updated_at->diffForHumans() }}</span>--}}
+                        <span class="timeago" title="最后活跃于">
+                            {{ if_query('order','recent') ? $topic->created_at->diffForHumans().'发布' : $topic->updated_at->diffForHumans().'回复' }}
+                        </span>
                     </div>
                 </div>
             </li>
