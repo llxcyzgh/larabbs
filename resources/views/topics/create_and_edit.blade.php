@@ -2,7 +2,6 @@
 
 
 @section('content')
-
     <div class="container">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -28,11 +27,8 @@
                             @else
                                 <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8">
                                     @endif
-
                                     {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                                     {{ csrf_field() }}
-
-
                                     <div class="form-group">
                                         <input class="form-control" type="text" name="title"
                                                value="{{ old('title', $topic->title ) }}" placeholder="请填写标题"
@@ -40,14 +36,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                            <select name="category_id" class="form-control" required="required">
-                                                <option value="" disabled="disabled" selected="selected"
-                                                        hidden="hidden">请选择分类
+                                        <select name="category_id" class="form-control" required="required">
+                                            <option value="" disabled="disabled" selected="selected"
+                                                    hidden="hidden">请选择分类
+                                            </option>
+                                            @foreach($categories as $category)
+                                                {{--<option value="{{ $category->id }}" {{ isset($topic->id) && $topic->category_id == $category->id?'selected':'' }} >--}}
+                                                <option value="{{ $category->id }}" {{ $topic->category_id == $category->id?'selected':'' }} >
+                                                    {{ $category->name }}
                                                 </option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -68,14 +67,12 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 {{-- 引入编辑器所需 css 和 js --}}
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/simditor.css') }}">
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('js/module.js') }}"></script>
@@ -87,14 +84,14 @@
         $(document).ready(function () {
             var editor = new Simditor({
                 textarea: $('#editor'),
-                upload:{
-                    url:'{{ route('topics.upload_image') }}',
-                    params:{ _token:'{{ csrf_token() }}'},
-                    fileKey:'upload_file',
-                    connectionCount:3,
-                    leaveConfirm:'文件上传中,关闭此页面将取消上传'
+                upload: {
+                    url: '{{ route('topics.upload_image') }}',
+                    params: {_token: '{{ csrf_token() }}'},
+                    fileKey: 'upload_file',
+                    connectionCount: 3,
+                    leaveConfirm: '文件上传中,关闭此页面将取消上传'
                 },
-                pasteImage:true
+                pasteImage: true
             });
         });
     </script>

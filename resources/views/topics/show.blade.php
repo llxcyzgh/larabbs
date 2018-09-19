@@ -40,19 +40,19 @@
                         {!! $topic->body !!}
                     </div>
 
-                    <div class="operate">
-                        <hr>
-                        <a href="{{ route('topics.edit',$topic->id) }}" class="btn btn-default btn-xs"
-                           role="button">
-                            <i class="glyphicon glyphicon-edit"></i> 编辑
-                        </a>
+                    @if(Auth::id() == $topic->user->id)
+                        <div class="operate">
+                            <hr>
+                            <a href="{{ route('topics.edit',$topic->id) }}" class="btn btn-default btn-xs"
+                               role="button">
+                                <i class="glyphicon glyphicon-edit"></i> 编辑
+                            </a>
 
-                        <a href="#" class="btn btn-default btn-xs" role="button">
-                            <i class="glyphicon glyphicon-trash"></i> 删除
-                        </a>
-
-
-                    </div>
+                            <a href="#" class="btn btn-default btn-xs" role="button">
+                                <i class="glyphicon glyphicon-trash"></i> 删除
+                            </a>
+                        </div>
+                    @endif
 
                 </div>
             </div>
