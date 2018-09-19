@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="row">
+        <!-- 左侧用户头像信息 -->
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs author-info">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
@@ -23,7 +24,10 @@
             </div>
         </div>
 
+        <!-- 右侧话题信息 + 回复列表 -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 topic-content">
+
+            <!-- 话题信息 -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="text-center">{{ $topic->title }}</h2>
@@ -54,13 +58,13 @@
                             {{--<i class="glyphicon glyphicon-trash"></i> 删除--}}
                             {{--</a>--}}
                             {{--<div style="display: inline-block">--}}
-                                <form action="{{ route('topics.destroy',$topic->id) }}" method="post">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <button type="submit" class="btn btn-default btn-xs pull-left" style="margin-left: 6px">
-                                        <i class="glyphicon glyphicon-trash"></i> 删除
-                                    </button>
-                                </form>
+                            <form action="{{ route('topics.destroy',$topic->id) }}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-default btn-xs pull-left" style="margin-left: 6px">
+                                    <i class="glyphicon glyphicon-trash"></i> 删除
+                                </button>
+                            </form>
                             {{--</div>--}}
                         </div>
                     @endif
@@ -68,6 +72,17 @@
 
                 </div>
             </div>
+
+            <!-- 回复列表 -->
+            <div class="panel panel-default topic-reply">
+                <div class="panel-body">
+                    @include('topics._reply_box',['topic'=>$topic])
+                    @include('topics._reply_list',['replies'=>$topic->replies()->with('user')->get()])
+                </div>
+
+            </div>
         </div>
+
+
     </div>
 @endsection
