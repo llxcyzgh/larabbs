@@ -60,7 +60,8 @@ class TopicsController extends Controller
 
     public function update(TopicRequest $request, Topic $topic)
     {
-        $this->authorize('update', $topic);
+//        $this->authorize('update', $topic);
+        $this->authorize('updateAndDestroy', $topic);
 
         $topic->update($request->all());
 
@@ -69,7 +70,9 @@ class TopicsController extends Controller
 
     public function destroy(Topic $topic)
     {
-        $this->authorize('destroy', $topic);
+//        $this->authorize('destroy', $topic);
+        $this->authorize('updateAndDestroy', $topic);
+
         $topic->delete();
 
         return redirect()->route('topics.index')->with('success', '删除成功~');
