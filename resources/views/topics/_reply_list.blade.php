@@ -3,7 +3,8 @@
         <div class="media" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
             <div class="avatar pull-left">
                 <a href="{{ route('users.show',[$reply->user_id]) }}">
-                    <img src="{{ config('app.url').$reply->user->avatar }}" alt="" class="media-object img-thumbnail" style="width: 48px;height: 48px;">
+                    <img src="{{ config('app.url').$reply->user->avatar }}" alt="" class="media-object img-thumbnail"
+                         style="width: 48px;height: 48px;">
                 </a>
             </div>
 
@@ -13,14 +14,23 @@
                         {{ $reply->user->name }}
                     </a>
                     <span> • </span>
-                    <span class="meta" title="{{ $reply->created_at }}">回复于 {{ $reply->created_at->diffForHumans() }}</span>
-                    
+                    <span class="meta"
+                          title="{{ $reply->created_at }}">回复于 {{ $reply->created_at->diffForHumans() }}</span>
+
                     <!-- 删除回复按钮 -->
-                    <span class="meta pull-right">
-                        <a href="#" title="删除回复">
-                            <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                        </a>
-                    </span>
+                    @if(Auth::user()->can('destroy',$reply))
+                    {{--@can('destroy',$reply)--}}
+                        <div class="meta pull-right">
+                            <form action="{{ route('replies.destroy',$reply->id) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-default btn-xs pull-left">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    {{--@endcan--}}
+                    @endif
                 </div>
 
                 <div class="reply-content">
@@ -29,5 +39,6 @@
             </div>
 
         </div>
+        <hr>
     @endforeach
 </div>

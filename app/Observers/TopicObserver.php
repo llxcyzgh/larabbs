@@ -41,4 +41,10 @@ class TopicObserver
             dispatch(new TranslateSlug($topic));
         }
     }
+
+    public function deleted(Topic $topic)
+    {
+//        $topic->replies()->delete();// 会触发 Eloquent 事件, 死循环
+        \DB::table('replies')->where('topic_id',$topic->id)->delete();
+    }
 }
