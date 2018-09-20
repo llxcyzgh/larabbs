@@ -63,4 +63,26 @@ class User extends Authenticatable
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+
+    public function setPasswordAttribute($pwd)
+    {
+        // 如果值的长度等于 60，即认为是已经做过加密的情况
+        if (strlen($pwd) != 60) {
+            $pwd = bcrypt($pwd);
+        }
+
+        $this->attributes['password'] = $pwd;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        // 如果不是以 /uploads/images/avatars/ 开头, 就是从后台上传的,需要处理
+        if (!starts_with($path,'/uploads/images/avatars/')) {
+            $path = '/uploads/images/avatars/'.$path;
+        }
+
+        $this->attributes['avatar'] = $path;
+    }
+
+
 }
