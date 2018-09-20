@@ -44,8 +44,8 @@
                         {!! $topic->body !!}
                     </div>
 
-                    {{--@if(Auth::id() == $topic->user->id)--}}
-                    @if(Auth::user()->can('updateAndDestroy',$topic))
+{{--                    @if(Auth::id() == $topic->user->id)--}}
+                    @if(Auth::user() && Auth::user()->can('updateAndDestroy',$topic))
                         {{--@can('updateAndDestroy',$topic))--}}
                         <div class="operate">
                             <hr>
@@ -76,8 +76,9 @@
             <!-- 回复列表 -->
             <div class="panel panel-default topic-reply">
                 <div class="panel-body">
-                    @include('topics._reply_box',['topic'=>$topic])
-                    @include('topics._reply_list',['replies'=>$topic->replies()->with('user')->get()])
+                    @includeWhen(Auth::check(),'topics._reply_box',['topic'=>$topic])
+{{--                    @include('topics._reply_list',['replies'=>$topic->replies()->with('user')->get()])--}}
+                    @include('topics._reply_list',['replies'=>$topic->replies()->with('user')->orderBy('created_at','desc')->get()])
                 </div>
 
             </div>
