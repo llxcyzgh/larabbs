@@ -10,8 +10,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('description','LaraBBs 爱好者社区')">
-    <title>@yield('title','LaraBBS') - Laravel 论坛</title>
+    <meta name="description" content="@yield('description',setting('seo_description','LaraBBs 爱好者社区'))">
+    <meta name="keyword" content="@yield('keyword',setting('seo_keyword','LaraBBs,php社区,php论坛,php爱好者社区'))">
+    <title>@yield('title',setting('site_name','LaraBBS')) - Laravel 论坛</title>
 
     <!-- Styles-->
     {{--<link rel="stylesheet" href="/css/app.css">--}}
