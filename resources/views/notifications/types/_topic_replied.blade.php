@@ -1,5 +1,5 @@
 <div class="media`">
-    <div class="avatar pull-left">
+    <div class="avatar pull-left" style="margin-right: 10px;">
         <a href="{{ route('users.show',$notification->data['user_id']) }}">
             <img src="{{ config('app.url').$notification->data['user_avatar'] }}" alt="{{ $notification->data['user_name'] }}" class="media-object img-thumbnail" style="width: 48px;height: 48px;">
         </a>
