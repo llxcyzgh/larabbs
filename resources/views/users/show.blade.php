@@ -29,6 +29,8 @@
                             {{-- dd() 测试函数 --}}
                             {{--<p>{{ dd($user->created_at) }}</p>--}}
                             {{--{{ dd(public_path()) }}--}}
+                            <h4><strong>最后活跃</strong></h4>
+                            <p>{{ $user->last_actived_at->diffForHumans() }}</p>
 
                         </div>
                     </div>
