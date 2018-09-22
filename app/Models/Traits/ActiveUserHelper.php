@@ -24,6 +24,8 @@ trait ActiveUserHelper
     protected $cache_key = 'larabbs_active_users';
     protected $cache_expire_in_minutes = 65;
 
+
+    // 1. 尝试从缓存中取得活跃用户,如果找不到则计算再缓存 【获取】
     public function getActiveUsers()
     {
         // 尝试从缓存中取出 cache_key 对应的数据。如果能取到，便直接返回数据。
@@ -33,6 +35,7 @@ trait ActiveUserHelper
         });
     }
 
+    // 2. 计算活跃用户并保存到缓存中 -- 外部直接调用的是本函数 【保存】
     public function calculateAndCacheActiveUsers()
     {
         // 取得活跃用户列表
@@ -41,6 +44,7 @@ trait ActiveUserHelper
         $this->cacheActiveUsers($active_users);
     }
 
+    // 2.1 执行计算缓存用户, 由 calculateAndCacheActiveUsers() 调用
     private function calculateActiveUsers()
     {
         $this->calculateTopicScore();
@@ -76,6 +80,7 @@ trait ActiveUserHelper
         return $active_users;
     }
 
+    // 2.1.1 计算话题权重
     private function calculateTopicScore()
     {
         // 从话题数据表里取出限定时间范围（$pass_days）内，有发表过话题的用户
@@ -90,6 +95,7 @@ trait ActiveUserHelper
         }
     }
 
+    // 2.1.2 计算回复权重
     private function calculateReplyScore()
     {
         // 从回复数据表里取出限定时间范围（$pass_days）内，有发表过回复的用户
@@ -109,6 +115,7 @@ trait ActiveUserHelper
         }
     }
 
+    // 2.2 缓存活跃用户, 由 calculateAndCacheActiveUsers() 调用
     private function cacheActiveUsers($active_users)
     {
         // 将数据放入缓存中

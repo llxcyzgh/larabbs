@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageUploadHandler;
 
 use App\Models\User;
+//use App\Models\Link;
 class TopicsController extends Controller
 {
     public function __construct()
@@ -22,14 +23,15 @@ class TopicsController extends Controller
         ]);
     }
 
-    public function index(Request $request, Topic $topic,User $user)
+    public function index(Request $request, Topic $topic,User $user,Link $link)
     {
 //	    dd($request->toArray());exit;
         $topics = $topic->withOrder($request->order)->paginate(20);// 默认分页是15条
         $active_users = $user->getActiveUsers();
 //        dd($active_users);
+        $links = $link->getAllCached();
 
-        return view('topics.index', compact('topics','active_users'));
+        return view('topics.index', compact('topics','active_users','links'));
     }
 
     public function show(Request $request, Topic $topic)

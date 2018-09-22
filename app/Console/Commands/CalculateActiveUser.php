@@ -1,9 +1,11 @@
 <?php
+// 通过计划任务(每小时) 生成活跃用户并保存在缓存中
 
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
+
 
 class CalculateActiveUser extends Command
 {
@@ -40,7 +42,7 @@ class CalculateActiveUser extends Command
      * @return mixed
      */
     // 最终执行的方法
-    public function handle()
+    public function handle(User $user)
     {
         // 在命令行打印一行信息
         $this->info("开始计算...");
