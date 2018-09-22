@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', 'PagesController@root')->name('home');
+//Route::get('/', 'PagesController@root')->name('home');
+Route::get('/', 'TopicsController@index')->name('home');
+
+
 Auth::routes();
 // 等同于以下9条
 // Authentication Routes...
@@ -56,4 +59,4 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
-Route::get('permission-denied','PagesController@permissionDenied')->name('permission-denied');
+Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
