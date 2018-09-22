@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageUploadHandler;
 
 use App\Models\User;
-//use App\Models\Link;
+use App\Models\Link;
 class TopicsController extends Controller
 {
     public function __construct()
